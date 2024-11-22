@@ -1,38 +1,27 @@
 class Solution {
 public:
-    int minEatingSpeed(vector<int>& nums, int h) {
-        
-    
-        
-        sort(nums.begin(),nums.end());
-        int l=1;
-        int r=nums[nums.size()-1];
-        int k;
-        long long int temp=0;
-        int ans=-1;
-        
-        while(l<=r){
-            k=l+ (r-l)/2;
-            for(int i=0;i<nums.size();i++){
-                if(nums[i]%k==0){
-                    temp=temp+nums[i]/k;
-                }
-                else {
-                    temp=temp+nums[i]/k + 1;
-                }
-            }
-            cout<<"temp 1 is "<< temp <<" for mid"<<k<<endl;
-            if(temp<=h){
-                cout<<"k is "<<k<<endl;
-                ans=k;
-                r=k-1;
-                temp=0;
-            }
-            else {
-                l=k+1;
-                temp=0;
+    int minEatingSpeed(vector<int>& piles, int h) {     
+       
+        int left = 1, right = *max_element(piles.begin(), piles.end());
+
+        while (left < right) {
+            
+            int middle = (left + right) / 2;
+            int hourSpent = 0;
+
+            for (int pile : piles) {
+                hourSpent += pile / middle + (pile % middle != 0);
             }
             
-        }return ans;
+            if (hourSpent <= h) {
+                right = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+
+        // Once the left and right boundaries coincide, we find the target value,
+        // that is, the minimum workable eating speed.
+        return left;
     }
 };
