@@ -1,12 +1,13 @@
 class Solution {
 public:
     int shipWithinDays(vector<int>& weights, int days) {
-        // int l = 1,
+    
         int l = *max_element(weights.begin(), weights.end());
-        int r = 0;
-        for(int i=0;i<weights.size();i++){
-            r = r+weights[i];
-        }
+        int r = accumulate(weights.begin(),weights.end(),0);
+        // int r = 0;
+        // for(int i=0;i<weights.size();i++){
+        //     r = r+weights[i];
+        // }
         int d =1;
         
         while(l<r){
