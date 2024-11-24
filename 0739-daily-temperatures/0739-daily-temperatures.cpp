@@ -3,7 +3,6 @@ public:
     vector<int> dailyTemperatures(vector<int>& t) {
         stack<int>st;
         
-        // st.push
         vector<int>ans(t.size(),0);
         for(int i=t.size()-1;i>=0;i--){
             while(!st.empty() && t[st.top()] <= t[i]){
